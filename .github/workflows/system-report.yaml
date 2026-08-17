@@ -1,0 +1,74 @@
+name: System Report
+
+on:
+  push:
+
+jobs:
+  system-info:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print OS and Kernel
+        run: |
+          echo "OS Name:"
+          cat /etc/os-release | grep PRETTY_NAME
+
+          echo "Kernel Version:"
+          uname -r
+
+      - name: Print Free Disk Space
+        run: |
+          echo "Free Disk Space:"
+          df -h /
+
+      - name: Print Current Date and Time
+        run: |
+          echo "Current Date and Time:"
+          date
+
+      - name: Install tree
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tree
+
+      - name: Display Home Directory Structure
+        run: |
+          echo "Home Directory: $HOME"
+          tree -L 2 "$HOME"
+
+
+  tool-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+
+      - name: Create report.json
+        run: |
+          cat > report.json <<'EOF'
+          {
+            "project": "System Report",
+            "status": "success",
+            "environment": "GitHub Actions"
+          }
+          EOF
+
+          cat report.json
+
+      - name: Read value using jq
+        run: |
+          echo "Project name:"
+          jq '.project' report.json
+
+      - name: Print Tool Versions
+        run: |
+          python3 --version
+          git --version
+          jq --version
+
+      - name: Report Complete
+        run: |
+          echo "Report complete"
