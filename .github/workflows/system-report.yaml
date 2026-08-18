@@ -1,6 +1,7 @@
 name: System Report
 
 on:
+    
   push:
 
 jobs:
