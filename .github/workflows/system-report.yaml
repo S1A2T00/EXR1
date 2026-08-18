@@ -1,6 +1,6 @@
 name: System Report
 
-on:
+on: 
     
   push:
 

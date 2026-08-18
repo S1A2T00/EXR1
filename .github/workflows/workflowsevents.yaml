@@ -1,6 +1,6 @@
 name: Workflows Events
 
-on:
+on: 
   push:
   pull_request:
   schedule:
