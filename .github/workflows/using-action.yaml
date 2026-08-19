@@ -8,7 +8,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: react-app
+        working-directory: react-a
 
     steps:
       - name: Checkout repository
